@@ -34,10 +34,20 @@
 
             let quoteSize = QUOTEBANK.length;
             let randomIndex = Math.floor(Math.random() * quoteSize);
-            let randomQuoteDate = QUOTEBANK[randomIndex];
-        
-            document.getElementById("text").innerText = randomQuoteDate.quote;
-            document.getElementById("author").innerText = randomQuoteDate.author;
+            let randomQuoteData = QUOTEBANK[randomIndex];
+
+            let twiterLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text='
+            // add the quote
+            let quoteInApiFormat = randomQuoteData.quote.replace(/ /g, "%20");
+            twiterLink += quoteInApiFormat;
+            // add the author
+            let authorInApiFormat =  randomQuoteData.author.replace(/ /g, "%20");
+            twiterLink += " - " + authorInApiFormat
+            
+            
+            document.getElementById("tweet-quote").href = twiterLink;
+            document.getElementById("text").innerText = randomQuoteData.quote;
+            document.getElementById("author").innerText = randomQuoteData.author;
         }
 
     </script>
@@ -55,7 +65,7 @@
         <div id="text"></div>
         <div id="author"></div>
         <button id="new-quote" onclick="generateQuote();">New Quote</button>
-        <a href="" id="tweet-quote">Tweet Quote</a>
+        <a href="#" id="tweet-quote" target="_blank">Tweet Quote</a>
 
     </wrapper>
 

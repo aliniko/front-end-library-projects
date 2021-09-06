@@ -12,35 +12,71 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-<!-- Marked library -->
+    <!-- Marked library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/3.0.2/marked.js"></script>
     <script>
-        // console.log(marked("# Ali Nekoh "))
+              // console.log(marked("# Ali Nekoh "))
 
-        function updatePreview() {
-            document.getElementById("preview").innerHTML= document.getElementById("editor").value;
+              function updatePreview() {
+              let previewElement  =   document.getElementById("preview");
+              let editorValue   = document.getElementById("editor").value;
+              let markedUpHTML  = marked(editorValue);
+              previewElement.innerHTML = markedUpHTML;
+              console.log("inside updatePreview() ");
+              }
 
-        }
+              function setDefault() {
+
+                let defaultText = `
+                # Ali Mohammad Nekoh
+                ## a markdown previewer
+                [web developer in Frankfurt Germany](https://alinekoh.netlify.app/)
+                \`inline code \`
+                - code
+                - all
+                - day
+
+                > Blockquotes are very handy in email to emulate reply text.
+                > This line is part of the same quote
+
+                [![IMAGE ALT TEXT HERE]("/img/Nekoh.jpg")]
+                ** these are bolded text **
+
+                 `;
+
+              let editorField  =  document.getElementById("editor");
+             let previewElement  =   document.getElementById("preview");
+             editorField.value = defaultText;
+             previewElement.innerHTML = marked(defaultText);
+              
+
+              }
     </script>
     <title>Markdown Previewer by Ali Nekoh</title>
   </head>
-  <body>
+  <body onload="setDefault()">
     <div class="container-fluid">
       <div class="row">
-        <div class="col text-center text-white bg-success">   
-        <h1>Markdown Previewer by Ali Nekoh</h1>
+        <div class="col text-center text-white bg-success">
+          <h1>Markdown Previewer by Ali Nekoh</h1>
         </div>
       </div>
       <div class="row">
-          <div class="col-6 bg-primary">
-            <p >the Editor will be here </p>
-            <textarea id="editor" name="" id="" cols="30" rows="10"></textarea>
-          </div>
-          <div class="col-6 bg-danger">
-            <p>the Editor will be here </p>
-            <div id="preview"> preview </div>
-
-          </div>
+        <div class="col-6 bg-primary">
+          <p>the Editor will be here</p>
+          <textarea
+            id="editor"
+            name=""
+            id=""
+            cols="70"
+            rows="12"
+            onkeyup="updatePreview()"
+          ></textarea>
+        </div>
+        <div class="col-6 bg-danger">
+          <p>the Editor will be here</p>
+          <div id="preview"> default text </div>
+        </div>
       </div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
